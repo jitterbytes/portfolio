@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+  background: #000;
+  color: #00ff9c;
+  font-family: "Courier New", monospace;
+  overflow-x: hidden;
+}
+
+.container {
+  padding: 40px;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  color: #00cc88;
+}
+
+.menu p, .container p {
+  cursor: pointer;
+  margin: 10px 0;
+}
+
+.menu p:hover {
+  text-shadow: 0 0 10px #00ff9c;
+}
+
+.scanline {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,255,156,0.03),
+    rgba(0,255,156,0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+}
+
+canvas#grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
