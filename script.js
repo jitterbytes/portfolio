@@ -8,7 +8,7 @@
 // ────────────────────────────────────────────────────────────
 const projects = [
   {
-    id: "parking",
+    id: "project1 parking",
     name: "Parking Occupancy System",
     short: "Real-time vehicle presence detection using embedded sensing",
     type: "IoT / Embedded",
@@ -22,24 +22,23 @@ const projects = [
     challenges: "Ground vibration from passing vehicles would occasionally trigger sensors. Solved with a moving-average filter and a minimum-hold timer. Power supply noise on analog lines required hardware-level decoupling.",
     result: "Stable detection with <2% false-trigger rate over a 2-week field test. Runs continuously on 5V rail with no observed failures.",
     github: ""
+  },
+  {
+    id: "project2 fpga-uart",
+    name: "FPGA UART Core",
+    short: "Hardware UART implementation in VHDL",
+    type: "FPGA / RTL",
+    platform: "Xilinx Artix-7",
+    tags: ["VHDL", "Xilinx", "Serial"],
+    status: "wip",
+    year: "2025",
+    problem: "...",
+    approach: "...",
+    hardware: ["Artix-7 Dev Board", "JTAG"],
+    challenges: "...",
+    result: "...",
+    github: ""
   }
-  // Add more projects:
-  // {
-  //   id: "fpga-uart",
-  //   name: "FPGA UART Core",
-  //   short: "Hardware UART implementation in VHDL",
-  //   type: "FPGA / RTL",
-  //   platform: "Xilinx Artix-7",
-  //   tags: ["VHDL", "Xilinx", "Serial"],
-  //   status: "wip",
-  //   year: "2025",
-  //   problem: "...",
-  //   approach: "...",
-  //   hardware: ["Artix-7 Dev Board", "JTAG"],
-  //   challenges: "...",
-  //   result: "...",
-  //   github: ""
-  // }
 ];
 
 
