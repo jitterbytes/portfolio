@@ -8,12 +8,14 @@
 </head>
 <body>
 
-<div class="grid-bg"></div>
-<canvas id="wave-canvas"></canvas>
-
 <div class="page">
+
+  <!-- NAV -->
   <nav>
-    <a class="nav-logo" href="index.html">JITTERBYTES</a>
+    <a class="nav-logo" href="index.html">
+      <span class="nav-logo-ref">U1</span>
+      Jitterbytes
+    </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="projects.html">Projects</a></li>
@@ -22,162 +24,239 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-label">embedded · fpga · sbc</div>
-    <h1 class="hero-name">Sarvesh Sant</h1>
-    <div class="hero-handle">[ JITTERBYTES ]</div>
-    <div class="hero-roles">
-      <span class="hero-role">Embedded Systems Developer</span>
-      <span class="hero-role">FPGA &amp; SBC Prototyping</span>
-      <span class="hero-role">IoT &amp; Low-Power Systems</span>
+    <div class="hero-left">
+      <div class="hero-ref">Embedded · FPGA · SBC · Real Hardware</div>
+      <h1 class="hero-name">
+        Sarvesh
+        <span>Sant</span>
+      </h1>
+      <div class="hero-role">
+        <div class="hero-role-item">Embedded Systems Developer</div>
+        <div class="hero-role-item">FPGA &amp; SBC Prototyping</div>
+        <div class="hero-role-item">IoT &amp; Low-Power Design</div>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="projects.html">View Projects →</a>
+        <a class="btn" href="https://github.com/yourusername" target="_blank">GitHub</a>
+      </div>
     </div>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="projects.html"><span>// View Projects</span></a>
-      <a class="btn" href="https://github.com/yourusername" target="_blank"><span>// GitHub</span></a>
+
+    <!-- PCB chip graphic -->
+    <div class="hero-chip">
+      <div class="chip-body">
+        <div class="chip-notch"></div>
+        <div class="chip-top-label">JITTERBYTES SYSTEMS</div>
+        <div class="chip-name-label">SARVESH-SANT</div>
+        <div class="chip-part-label">MCU · FPGA · SBC — REV 1.0</div>
+        <div class="chip-pins">
+          <div class="chip-pin">
+            <span class="chip-pin-num">1</span>
+            <div class="chip-pin-line"></div>
+            <span class="chip-pin-name">UART_TX</span>
+          </div>
+          <div class="chip-pin">
+            <span class="chip-pin-num">2</span>
+            <div class="chip-pin-line"></div>
+            <span class="chip-pin-name">SPI_MOSI</span>
+          </div>
+          <div class="chip-pin">
+            <span class="chip-pin-num">3</span>
+            <div class="chip-pin-line"></div>
+            <span class="chip-pin-name">I2C_SDA</span>
+          </div>
+          <div class="chip-pin">
+            <span class="chip-pin-num">4</span>
+            <div class="chip-pin-line"></div>
+            <span class="chip-pin-name">GPIO_IRQ</span>
+          </div>
+          <div class="chip-pin">
+            <span class="chip-pin-num">5</span>
+            <div class="chip-pin-line"></div>
+            <span class="chip-pin-name">FPGA_CLK</span>
+          </div>
+          <div class="chip-pin">
+            <span class="chip-pin-num">6</span>
+            <div class="chip-pin-line"></div>
+            <span class="chip-pin-name">3V3_PWR</span>
+          </div>
+          <div class="chip-pin">
+            <span class="chip-pin-num">7</span>
+            <div class="chip-pin-line"></div>
+            <span class="chip-pin-name">GND</span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="stat">
-      <div class="stat-value">MCU</div>
-      <div class="stat-label">ESP32 · STM32 · AVR</div>
+  <!-- SPECS STRIP -->
+  <div class="trace-divider">
+    <div class="trace-via"></div>
+    <div class="trace-line"></div>
+    <div class="trace-via"></div>
+  </div>
+
+  <div class="specs-strip">
+    <div class="spec">
+      <div class="spec-ref">Domain</div>
+      <div class="spec-value">MCU</div>
+      <div class="spec-label">ESP32 · STM32 · AVR</div>
     </div>
-    <div class="stat">
-      <div class="stat-value">FPGA</div>
-      <div class="stat-label">RTL · HDL · Synthesis</div>
+    <div class="spec">
+      <div class="spec-ref">Domain</div>
+      <div class="spec-value">FPGA</div>
+      <div class="spec-label">RTL · HDL · Synthesis</div>
     </div>
-    <div class="stat">
-      <div class="stat-value">SBC</div>
-      <div class="stat-label">Linux · Bare-metal</div>
+    <div class="spec">
+      <div class="spec-ref">Domain</div>
+      <div class="spec-value">SBC</div>
+      <div class="spec-label">Embedded Linux · Bare-metal</div>
     </div>
-    <div class="stat">
-      <div class="stat-value">Real</div>
-      <div class="stat-label">Hardware. Always.</div>
+    <div class="spec">
+      <div class="spec-ref">Philosophy</div>
+      <div class="spec-value">Real</div>
+      <div class="spec-label">Ships on hardware. Always.</div>
     </div>
   </div>
 
   <!-- ABOUT -->
-  <section class="about-section">
-    <div class="section-header" style="grid-column: 1 / -1; margin-bottom: 0;">
-      <span class="section-label">// about</span>
-      <div class="section-line"></div>
-    </div>
+  <div class="trace-divider" style="margin-top:3rem;">
+    <div class="trace-via"></div>
+    <div class="trace-line"></div>
+    <span class="trace-label">About</span>
+    <div class="trace-line"></div>
+    <div class="trace-via"></div>
+  </div>
 
-    <div class="about-text">
-      <p>I build things that run close to the metal. My work spans <span>MCUs</span>, <span>FPGAs</span>, and <span>single-board computers</span> — wherever the software meets real hardware constraints.</p>
-      <p>I care about <span>system reliability</span>, <span>low-power design</span>, and making devices that actually behave in the real world — not just on a bench under ideal conditions.</p>
-      <p>Right now I'm pushing into FPGA territory — writing RTL, thinking in clock cycles, and building systems where timing is everything.</p>
-    </div>
-
-    <div class="about-terminal">
-      <div class="terminal-bar">
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
-        <div class="terminal-dot"></div>
+  <section class="section">
+    <div class="about-grid">
+      <div class="about-body">
+        <p>I build things that run close to the metal. My work spans <strong>MCUs, FPGAs, and single-board computers</strong> — wherever software meets real hardware constraints and the datasheet becomes the ground truth.</p>
+        <p>I care about <strong>system reliability</strong> and <strong>low-power design</strong> — making devices that behave in the real world, not just on a bench under ideal conditions. If it breaks in the field, it doesn't count.</p>
+        <p>Right now I'm going deep into <strong>FPGA design</strong> — writing RTL, thinking in clock cycles, building systems where timing is everything and there's no OS to save you.</p>
       </div>
-      <div class="terminal-line"><span class="cmd">$ whoami</span></div>
-      <div class="terminal-line"><span class="val">sarvesh_sant</span></div>
-      <div class="terminal-line">&nbsp;</div>
-      <div class="terminal-line"><span class="cmd">$ cat focus.txt</span></div>
-      <div class="terminal-line"><span class="val">MCU firmware &amp; drivers</span></div>
-      <div class="terminal-line"><span class="val">FPGA RTL design</span></div>
-      <div class="terminal-line"><span class="val">Embedded Linux on SBC</span></div>
-      <div class="terminal-line"><span class="val">IoT + real-world sensing</span></div>
-      <div class="terminal-line">&nbsp;</div>
-      <div class="terminal-line"><span class="cmd">$ uptime</span></div>
-      <div class="terminal-line"><span class="comment"># always building</span></div>
+
+      <!-- Datasheet-style component card -->
+      <div class="component-card">
+        <div class="component-card-header">
+          <div>
+            <div class="component-pn">SARVESH-SANT</div>
+            <div class="component-mfg">Mumbai, India</div>
+          </div>
+          <div class="component-pkg">ACTIVE</div>
+        </div>
+        <table class="component-specs-table">
+          <tr><td>Supply Voltage</td><td>3.3V – 5V</td></tr>
+          <tr><td>Languages</td><td>C, C++, VHDL</td></tr>
+          <tr><td>Interfaces</td><td>UART · SPI · I²C · JTAG</td></tr>
+          <tr><td>Operating Temp</td><td>Lab bench, 11 PM</td></tr>
+          <tr><td>Package</td><td>Available for hire</td></tr>
+        </table>
+      </div>
     </div>
   </section>
 
   <!-- SKILLS -->
-  <section class="skills-section">
-    <div class="section-header">
-      <span class="section-label">// stack</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="skill-groups">
-      <div class="skill-group">
-        <div class="skill-group-title">MCU</div>
-        <div class="skill-tags">
-          <span class="skill-tag">ESP32</span>
-          <span class="skill-tag">STM32</span>
-          <span class="skill-tag">AVR</span>
-          <span class="skill-tag">RTOS</span>
-          <span class="skill-tag">FreeRTOS</span>
+  <div class="trace-divider">
+    <div class="trace-via"></div>
+    <div class="trace-line"></div>
+    <span class="trace-label">Stack</span>
+    <div class="trace-line"></div>
+    <div class="trace-via"></div>
+  </div>
+
+  <section class="section">
+    <div class="skill-board">
+      <div class="skill-zone">
+        <div class="skill-zone-label">MCU</div>
+        <div class="skill-chips">
+          <span class="skill-chip">ESP32</span>
+          <span class="skill-chip">STM32</span>
+          <span class="skill-chip">AVR</span>
+          <span class="skill-chip">FreeRTOS</span>
+          <span class="skill-chip">Bare-metal C</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">FPGA</div>
-        <div class="skill-tags">
-          <span class="skill-tag">VHDL</span>
-          <span class="skill-tag">Verilog</span>
-          <span class="skill-tag">Xilinx</span>
-          <span class="skill-tag">RTL Design</span>
+      <div class="skill-zone">
+        <div class="skill-zone-label">FPGA</div>
+        <div class="skill-chips">
+          <span class="skill-chip">VHDL</span>
+          <span class="skill-chip">Verilog</span>
+          <span class="skill-chip">Xilinx</span>
+          <span class="skill-chip">RTL Design</span>
+          <span class="skill-chip">Timing Analysis</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">SBC / Linux</div>
-        <div class="skill-tags">
-          <span class="skill-tag">Raspberry Pi</span>
-          <span class="skill-tag">Embedded Linux</span>
-          <span class="skill-tag">Device Drivers</span>
-          <span class="skill-tag">Yocto</span>
+      <div class="skill-zone">
+        <div class="skill-zone-label">SBC / Linux</div>
+        <div class="skill-chips">
+          <span class="skill-chip">Raspberry Pi</span>
+          <span class="skill-chip">Embedded Linux</span>
+          <span class="skill-chip">Device Drivers</span>
+          <span class="skill-chip">Yocto</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Languages</div>
-        <div class="skill-tags">
-          <span class="skill-tag">C</span>
-          <span class="skill-tag">C++</span>
-          <span class="skill-tag">Python</span>
-          <span class="skill-tag">Bash</span>
+      <div class="skill-zone">
+        <div class="skill-zone-label">Protocols</div>
+        <div class="skill-chips">
+          <span class="skill-chip">UART</span>
+          <span class="skill-chip">SPI</span>
+          <span class="skill-chip">I²C</span>
+          <span class="skill-chip">MQTT</span>
+          <span class="skill-chip">CAN</span>
+          <span class="skill-chip">JTAG</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Protocols</div>
-        <div class="skill-tags">
-          <span class="skill-tag">UART</span>
-          <span class="skill-tag">SPI</span>
-          <span class="skill-tag">I²C</span>
-          <span class="skill-tag">MQTT</span>
-          <span class="skill-tag">CAN</span>
+      <div class="skill-zone">
+        <div class="skill-zone-label">Languages</div>
+        <div class="skill-chips">
+          <span class="skill-chip">C</span>
+          <span class="skill-chip">C++</span>
+          <span class="skill-chip">Python</span>
+          <span class="skill-chip">Bash</span>
+          <span class="skill-chip">VHDL</span>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title">Tools</div>
-        <div class="skill-tags">
-          <span class="skill-tag">KiCad</span>
-          <span class="skill-tag">Oscilloscope</span>
-          <span class="skill-tag">Logic Analyzer</span>
-          <span class="skill-tag">GDB</span>
+      <div class="skill-zone">
+        <div class="skill-zone-label">Tools</div>
+        <div class="skill-chips">
+          <span class="skill-chip">KiCad</span>
+          <span class="skill-chip">Oscilloscope</span>
+          <span class="skill-chip">Logic Analyzer</span>
+          <span class="skill-chip">GDB</span>
+          <span class="skill-chip">Vivado</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="contact-section">
-    <div class="section-header">
-      <span class="section-label">// contact</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="contact-links">
-      <a class="contact-link" href="https://github.com/yourusername" target="_blank">
-        <span class="contact-link-label">GitHub</span>
-        <span class="contact-link-value">github.com/yourusername</span>
+  <div class="trace-divider">
+    <div class="trace-via"></div>
+    <div class="trace-line"></div>
+    <span class="trace-label">Contact</span>
+    <div class="trace-line"></div>
+    <div class="trace-via"></div>
+  </div>
+
+  <section class="section">
+    <div class="contact-grid">
+      <a class="contact-item" href="https://github.com/yourusername" target="_blank">
+        <span class="contact-item-label">GitHub</span>
+        <span class="contact-item-val">github.com/yourusername</span>
       </a>
-      <a class="contact-link" href="https://linkedin.com/in/yourusername" target="_blank">
-        <span class="contact-link-label">LinkedIn</span>
-        <span class="contact-link-value">linkedin.com/in/yourusername</span>
+      <a class="contact-item" href="https://linkedin.com/in/yourusername" target="_blank">
+        <span class="contact-item-label">LinkedIn</span>
+        <span class="contact-item-val">linkedin.com/in/yourusername</span>
       </a>
-      <a class="contact-link" href="mailto:you@email.com">
-        <span class="contact-link-label">Email</span>
-        <span class="contact-link-value">you@email.com</span>
+      <a class="contact-item" href="mailto:you@email.com">
+        <span class="contact-item-label">Email</span>
+        <span class="contact-item-val">you@email.com</span>
       </a>
     </div>
   </section>
-</div>
 
+</div><!-- .page -->
 <script src="script.js"></script>
 </body>
 </html>

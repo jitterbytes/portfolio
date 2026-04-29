@@ -1,34 +1,33 @@
 /* ============================================================
    JITTERBYTES — script.js
-   Edit the PROJECT DATA section to add/update your projects.
-   Everything else runs automatically.
+   Only edit the PROJECT DATA block below.
    ============================================================ */
 
-// ============================================================
-// PROJECT DATA — edit this
-// ============================================================
+// ────────────────────────────────────────────────────────────
+//  PROJECT DATA  ← edit this
+// ────────────────────────────────────────────────────────────
 const projects = [
   {
     id: "parking",
     name: "Parking Occupancy System",
-    short: "Real-time vehicle detection using embedded sensing",
+    short: "Real-time vehicle presence detection using embedded sensing",
     type: "IoT / Embedded",
     platform: "ESP32",
-    tags: ["ESP32", "C", "MQTT"],
-    status: "done",            // done | wip | archived
+    tags: ["ESP32", "C", "MQTT", "Sensor Fusion"],
+    status: "done",    // done | wip | archived
     year: "2024",
-    problem: "Parking lots in dense urban areas have no real-time occupancy data. Drivers waste time circling, and operators have no visibility. The goal was a low-cost, reliable embedded system that could detect vehicle presence accurately under real-world conditions — vibration, weather, varying light.",
-    approach: "Deployed sensor fusion combining IR and ultrasonic readings, feeding into a debounce + threshold filter to eliminate false triggers. Data is published over MQTT to a lightweight broker. The firmware was written in C with a custom state machine for each slot, keeping the logic deterministic and easy to debug.",
+    problem: "Parking lots have no real-time occupancy data. Drivers waste time circling. Operators are blind. The goal was a low-cost embedded system that detects vehicle presence accurately under real-world conditions — vibration, weather, varying light.",
+    approach: "Sensor fusion combining IR and ultrasonic readings, feeding into a debounce + threshold filter to cut false triggers. Data published over MQTT. Firmware in C with a per-slot state machine keeping logic deterministic and debuggable.",
     hardware: ["ESP32", "HC-SR04", "IR Proximity Sensor", "MQTT Broker", "Custom PCB"],
-    challenges: "Noise was the biggest adversary — ground vibration from passing vehicles would occasionally trigger sensors. Solved with a moving-average filter and a minimum-occupancy hold timer. Power supply noise on the analog lines also required hardware-level decoupling.",
-    result: "Stable detection with <2% false-trigger rate over a 2-week field test. System runs continuously on a 5V rail with no observed failures.",
-    github: ""  // leave empty to hide
+    challenges: "Ground vibration from passing vehicles would occasionally trigger sensors. Solved with a moving-average filter and a minimum-hold timer. Power supply noise on analog lines required hardware-level decoupling.",
+    result: "Stable detection with <2% false-trigger rate over a 2-week field test. Runs continuously on 5V rail with no observed failures.",
+    github: ""
   }
-  // Add more projects here:
+  // Add more projects:
   // {
   //   id: "fpga-uart",
-  //   name: "FPGA UART Controller",
-  //   short: "Hardware UART core in VHDL",
+  //   name: "FPGA UART Core",
+  //   short: "Hardware UART implementation in VHDL",
   //   type: "FPGA / RTL",
   //   platform: "Xilinx Artix-7",
   //   tags: ["VHDL", "Xilinx", "Serial"],
@@ -36,7 +35,7 @@ const projects = [
   //   year: "2025",
   //   problem: "...",
   //   approach: "...",
-  //   hardware: ["Artix-7", "JTAG"],
+  //   hardware: ["Artix-7 Dev Board", "JTAG"],
   //   challenges: "...",
   //   result: "...",
   //   github: ""
@@ -44,210 +43,148 @@ const projects = [
 ];
 
 
-// ============================================================
-// NAVIGATION
-// ============================================================
+// ────────────────────────────────────────────────────────────
+//  NAVIGATION
+// ────────────────────────────────────────────────────────────
 function navigate(page) {
-  document.querySelector('.page').style.opacity = '0';
-  document.querySelector('.page').style.transform = 'translateY(6px)';
-  document.querySelector('.page').style.transition = 'all 0.25s ease';
-  setTimeout(() => { window.location.href = page; }, 250);
+  const p = document.querySelector('.page');
+  if (p) {
+    p.style.transition = 'opacity 0.22s ease, transform 0.22s ease';
+    p.style.opacity = '0';
+    p.style.transform = 'translateY(6px)';
+  }
+  setTimeout(() => { window.location.href = page; }, 230);
 }
 
-// Active nav link
+// Active nav state
 document.addEventListener('DOMContentLoaded', () => {
   const page = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a').forEach(a => {
     if (a.getAttribute('href') === page) a.classList.add('active');
   });
+
+  initProjectsGrid();
+  initProjectDetail();
 });
 
 
-// ============================================================
-// WAVEFORM BACKGROUND
-// ============================================================
-function initWave() {
-  const canvas = document.getElementById('wave-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-  let t = 0;
+// ────────────────────────────────────────────────────────────
+//  PROJECTS GRID — projects.html
+// ────────────────────────────────────────────────────────────
+function initProjectsGrid() {
+  const grid = document.getElementById('project-grid');
+  if (!grid) return;
 
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = 120;
-  }
+  const statusLabel = { done: 'Complete', wip: 'In Progress', archived: 'Archived' };
+  const statusClass = { done: 'status-done', wip: 'status-wip', archived: 'status-archived' };
 
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.strokeStyle = '#e8a020';
-    ctx.lineWidth = 1.5;
-    ctx.shadowColor = '#e8a020';
-    ctx.shadowBlur = 4;
-    ctx.beginPath();
+  projects.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', p.name);
+    card.style.animationDelay = `${i * 0.07}s`;
 
-    const w = canvas.width;
-    const h = canvas.height;
-    const mid = h * 0.5;
-
-    for (let x = 0; x <= w; x++) {
-      const freq1 = 0.008;
-      const freq2 = 0.02;
-      const freq3 = 0.005;
-      const y = mid
-        + Math.sin(x * freq1 + t * 0.8)  * 18
-        + Math.sin(x * freq2 + t * 1.3)  * 8
-        + Math.sin(x * freq3 + t * 0.4)  * 12;
-
-      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    }
-    ctx.stroke();
-
-    // second trace — dimmer
-    ctx.strokeStyle = 'rgba(232,160,32,0.25)';
-    ctx.shadowBlur = 0;
-    ctx.beginPath();
-    for (let x = 0; x <= w; x++) {
-      const y = mid
-        + Math.sin(x * 0.012 + t * 0.5 + 1.2) * 14
-        + Math.sin(x * 0.03  + t * 0.9)         * 5;
-      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-    }
-    ctx.stroke();
-
-    t += 0.015;
-    requestAnimationFrame(draw);
-  }
-
-  resize();
-  window.addEventListener('resize', resize);
-  draw();
-}
-
-
-// ============================================================
-// PROJECTS LIST — projects.html
-// ============================================================
-function initProjectsList() {
-  const container = document.getElementById('dir-body');
-  if (!container) return;
-
-  projects.forEach(p => {
-    const row = document.createElement('div');
-    row.className = 'dir-row';
-    row.setAttribute('role', 'row');
-    row.setAttribute('tabindex', '0');
-
-    const statusClass = { done: 'status-done', wip: 'status-wip', archived: 'status-arch' }[p.status] || '';
-    const statusLabel = { done: 'COMPLETE', wip: 'IN PROGRESS', archived: 'ARCHIVED' }[p.status] || '';
-
-    row.innerHTML = `
-      <div class="dir-icon">[D]</div>
-      <div class="dir-name">${p.name}</div>
-      <div class="dir-type">${p.type}</div>
-      <div class="dir-tags">${p.tags.map(t => `<span class="dir-tag">${t}</span>`).join('')}</div>
-      <div class="dir-status ${statusClass}">${statusLabel}</div>
+    card.innerHTML = `
+      <div class="project-card-ref">
+        <span class="project-card-ref-box">J${String(i + 1).padStart(2, '0')}</span>
+        ${p.type}
+      </div>
+      <div class="project-card-name">${p.name}</div>
+      <div class="project-card-desc">${p.short}</div>
+      <div class="project-card-footer">
+        <div class="project-card-tags">
+          ${p.tags.slice(0, 3).map(t => `<span class="project-card-tag">${t}</span>`).join('')}
+        </div>
+        <span class="project-status ${statusClass[p.status]}">${statusLabel[p.status]}</span>
+      </div>
     `;
 
-    row.addEventListener('click', () => openProject(p.id));
-    row.addEventListener('keydown', e => { if (e.key === 'Enter') openProject(p.id); });
-    container.appendChild(row);
+    card.addEventListener('click', () => openProject(p.id));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter') openProject(p.id); });
+    grid.appendChild(card);
   });
 }
 
 
-// ============================================================
-// PROJECT DETAIL — project-template.html
-// ============================================================
+// ────────────────────────────────────────────────────────────
+//  PROJECT DETAIL — project-template.html
+// ────────────────────────────────────────────────────────────
 function initProjectDetail() {
-  const container = document.getElementById('project-detail');
-  if (!container) return;
+  const wrap = document.getElementById('project-detail');
+  if (!wrap) return;
 
   const id = localStorage.getItem('projectId');
-  const p  = projects.find(x => x.id === id);
+  const p = projects.find(x => x.id === id);
 
   if (!p) {
-    container.innerHTML = `<p class="detail-subtitle">Project not found.</p>`;
+    wrap.innerHTML = `<p class="detail-desc">Project not found.</p>`;
     return;
   }
 
   document.title = `${p.name} | Jitterbytes`;
 
-  const hwChips = p.hardware.map(h => `<span class="hw-chip">${h}</span>`).join('');
-  const githubBtn = p.github
-    ? `<a class="btn btn-primary" href="${p.github}" target="_blank"><span>// View on GitHub</span></a>`
-    : '';
+  const statusLabel = { done: 'Complete', wip: 'In Progress', archived: 'Archived' };
+  const statusClass = { done: 'status-done', wip: 'status-wip', archived: 'status-archived' };
 
-  container.innerHTML = `
-    <span class="detail-back" onclick="navigate('projects.html')">← back to /projects</span>
+  wrap.innerHTML = `
+    <span class="detail-back" onclick="navigate('projects.html')">← /projects</span>
 
     <h1 class="detail-title">${p.name}</h1>
-    <p class="detail-subtitle">${p.short}</p>
+    <p class="detail-desc">${p.short}</p>
 
-    <div class="detail-meta">
+    <div class="detail-meta-bar">
       <div class="detail-meta-item">
-        <span class="detail-meta-label">Type</span>
-        <span class="detail-meta-value">${p.type}</span>
+        <div class="detail-meta-label">Type</div>
+        <div class="detail-meta-value">${p.type}</div>
       </div>
       <div class="detail-meta-item">
-        <span class="detail-meta-label">Platform</span>
-        <span class="detail-meta-value">${p.platform}</span>
+        <div class="detail-meta-label">Platform</div>
+        <div class="detail-meta-value">${p.platform}</div>
       </div>
       <div class="detail-meta-item">
-        <span class="detail-meta-label">Year</span>
-        <span class="detail-meta-value">${p.year}</span>
+        <div class="detail-meta-label">Year</div>
+        <div class="detail-meta-value">${p.year}</div>
       </div>
       <div class="detail-meta-item">
-        <span class="detail-meta-label">Status</span>
-        <span class="detail-meta-value ${{ done:'status-done', wip:'status-wip', archived:'status-arch' }[p.status]}">${
-          { done:'Complete', wip:'In Progress', archived:'Archived' }[p.status]
-        }</span>
+        <div class="detail-meta-label">Status</div>
+        <div class="detail-meta-value ${statusClass[p.status]}">${statusLabel[p.status]}</div>
       </div>
     </div>
 
     <div class="detail-sections">
       <div class="detail-block">
-        <div class="detail-block-title">// Problem</div>
+        <div class="detail-block-label">Problem</div>
         <div class="detail-block-body">${p.problem}</div>
       </div>
       <div class="detail-block">
-        <div class="detail-block-title">// Approach</div>
+        <div class="detail-block-label">Approach</div>
         <div class="detail-block-body">${p.approach}</div>
       </div>
       <div class="detail-block">
-        <div class="detail-block-title">// Hardware &amp; Stack</div>
-        <div class="hw-chips">${hwChips}</div>
+        <div class="detail-block-label">Hardware</div>
+        <div class="hw-chips">${p.hardware.map(h => `<span class="hw-chip">${h}</span>`).join('')}</div>
       </div>
       <div class="detail-block">
-        <div class="detail-block-title">// Challenges</div>
+        <div class="detail-block-label">Challenges</div>
         <div class="detail-block-body">${p.challenges}</div>
       </div>
       <div class="detail-block">
-        <div class="detail-block-title">// Result</div>
+        <div class="detail-block-label">Result</div>
         <div class="detail-block-body">${p.result}</div>
       </div>
     </div>
 
-    <div class="detail-github">
-      ${githubBtn}
-    </div>
+    ${p.github ? `<div class="detail-github"><a class="btn btn-primary" href="${p.github}" target="_blank">View on GitHub →</a></div>` : ''}
   `;
 }
 
 
-// ============================================================
-// OPEN PROJECT
-// ============================================================
+// ────────────────────────────────────────────────────────────
+//  OPEN PROJECT
+// ────────────────────────────────────────────────────────────
 function openProject(id) {
   localStorage.setItem('projectId', id);
   navigate('project-template.html');
 }
-
-
-// ============================================================
-// BOOT
-// ============================================================
-document.addEventListener('DOMContentLoaded', () => {
-  initWave();
-  initProjectsList();
-  initProjectDetail();
-});
