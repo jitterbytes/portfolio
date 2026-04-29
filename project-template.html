@@ -2,16 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project | Jitterbytes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="scanline"></div>
+<div class="grid-bg"></div>
+<canvas id="wave-canvas"></canvas>
 
-<div class="container" id="project-detail"></div>
+<div class="page">
+  <nav>
+    <a class="nav-logo" href="index.html">JITTERBYTES</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+    </ul>
+  </nav>
 
-<p onclick="navigate('projects.html')">> BACK</p>
+  <div class="project-detail-page">
+    <div id="project-detail"></div>
+  </div>
+</div>
 
 <script src="script.js"></script>
 </body>

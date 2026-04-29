@@ -2,20 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects | Jitterbytes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="scanline"></div>
+<div class="grid-bg"></div>
+<canvas id="wave-canvas"></canvas>
 
-<div class="container">
-  <h1>[ PROJECTS ]</h1>
+<div class="page">
+  <nav>
+    <a class="nav-logo" href="index.html">JITTERBYTES</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+    </ul>
+  </nav>
 
-  <div id="projects-container"></div>
+  <div class="projects-page">
+    <div class="section-header">
+      <span class="section-label">// projects</span>
+      <div class="section-line"></div>
+    </div>
 
-  <br>
-  <p onclick="navigate('index.html')">> BACK</p>
+    <p class="dir-header">~/jitterbytes/projects — click to open</p>
+
+    <div class="dir-listing" role="table">
+      <!-- Column headers -->
+      <div class="dir-row header-row" role="row">
+        <div class="col-header"></div>
+        <div class="col-header">Name</div>
+        <div class="col-header">Type</div>
+        <div class="col-header">Stack</div>
+        <div class="col-header">Status</div>
+      </div>
+      <!-- Rows injected by script.js -->
+      <div id="dir-body"></div>
+    </div>
+  </div>
 </div>
 
 <script src="script.js"></script>

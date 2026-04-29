@@ -2,28 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sarvesh Sant | Jitterbytes</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="scanline"></div>
+<div class="grid-bg"></div>
+<canvas id="wave-canvas"></canvas>
 
-<canvas id="grid"></canvas>
+<div class="page">
+  <nav>
+    <a class="nav-logo" href="index.html">JITTERBYTES</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="projects.html">Projects</a></li>
+    </ul>
+  </nav>
 
-<div class="container">
-  <h1>Sarvesh Sant</h1>
-  <h2>[ Jitterbytes ]</h2>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">embedded · fpga · sbc</div>
+    <h1 class="hero-name">Sarvesh Sant</h1>
+    <div class="hero-handle">[ JITTERBYTES ]</div>
+    <div class="hero-roles">
+      <span class="hero-role">Embedded Systems Developer</span>
+      <span class="hero-role">FPGA &amp; SBC Prototyping</span>
+      <span class="hero-role">IoT &amp; Low-Power Systems</span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="projects.html"><span>// View Projects</span></a>
+      <a class="btn" href="https://github.com/yourusername" target="_blank"><span>// GitHub</span></a>
+    </div>
+  </section>
 
-  <p class="typing">
-    > Embedded Systems Developer  
-    > Building real-world IoT devices
-  </p>
-
-  <div class="menu">
-    <p onclick="navigate('index.html')">> BOOT: HOME</p>
-    <p onclick="navigate('projects.html')">> LOAD: PROJECTS</p>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">MCU</div>
+      <div class="stat-label">ESP32 · STM32 · AVR</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">FPGA</div>
+      <div class="stat-label">RTL · HDL · Synthesis</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">SBC</div>
+      <div class="stat-label">Linux · Bare-metal</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">Real</div>
+      <div class="stat-label">Hardware. Always.</div>
+    </div>
   </div>
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="section-header" style="grid-column: 1 / -1; margin-bottom: 0;">
+      <span class="section-label">// about</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="about-text">
+      <p>I build things that run close to the metal. My work spans <span>MCUs</span>, <span>FPGAs</span>, and <span>single-board computers</span> — wherever the software meets real hardware constraints.</p>
+      <p>I care about <span>system reliability</span>, <span>low-power design</span>, and making devices that actually behave in the real world — not just on a bench under ideal conditions.</p>
+      <p>Right now I'm pushing into FPGA territory — writing RTL, thinking in clock cycles, and building systems where timing is everything.</p>
+    </div>
+
+    <div class="about-terminal">
+      <div class="terminal-bar">
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+        <div class="terminal-dot"></div>
+      </div>
+      <div class="terminal-line"><span class="cmd">$ whoami</span></div>
+      <div class="terminal-line"><span class="val">sarvesh_sant</span></div>
+      <div class="terminal-line">&nbsp;</div>
+      <div class="terminal-line"><span class="cmd">$ cat focus.txt</span></div>
+      <div class="terminal-line"><span class="val">MCU firmware &amp; drivers</span></div>
+      <div class="terminal-line"><span class="val">FPGA RTL design</span></div>
+      <div class="terminal-line"><span class="val">Embedded Linux on SBC</span></div>
+      <div class="terminal-line"><span class="val">IoT + real-world sensing</span></div>
+      <div class="terminal-line">&nbsp;</div>
+      <div class="terminal-line"><span class="cmd">$ uptime</span></div>
+      <div class="terminal-line"><span class="comment"># always building</span></div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="skills-section">
+    <div class="section-header">
+      <span class="section-label">// stack</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-group">
+        <div class="skill-group-title">MCU</div>
+        <div class="skill-tags">
+          <span class="skill-tag">ESP32</span>
+          <span class="skill-tag">STM32</span>
+          <span class="skill-tag">AVR</span>
+          <span class="skill-tag">RTOS</span>
+          <span class="skill-tag">FreeRTOS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">FPGA</div>
+        <div class="skill-tags">
+          <span class="skill-tag">VHDL</span>
+          <span class="skill-tag">Verilog</span>
+          <span class="skill-tag">Xilinx</span>
+          <span class="skill-tag">RTL Design</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">SBC / Linux</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Raspberry Pi</span>
+          <span class="skill-tag">Embedded Linux</span>
+          <span class="skill-tag">Device Drivers</span>
+          <span class="skill-tag">Yocto</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">C</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Bash</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Protocols</div>
+        <div class="skill-tags">
+          <span class="skill-tag">UART</span>
+          <span class="skill-tag">SPI</span>
+          <span class="skill-tag">I²C</span>
+          <span class="skill-tag">MQTT</span>
+          <span class="skill-tag">CAN</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">Tools</div>
+        <div class="skill-tags">
+          <span class="skill-tag">KiCad</span>
+          <span class="skill-tag">Oscilloscope</span>
+          <span class="skill-tag">Logic Analyzer</span>
+          <span class="skill-tag">GDB</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section">
+    <div class="section-header">
+      <span class="section-label">// contact</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="contact-links">
+      <a class="contact-link" href="https://github.com/yourusername" target="_blank">
+        <span class="contact-link-label">GitHub</span>
+        <span class="contact-link-value">github.com/yourusername</span>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/yourusername" target="_blank">
+        <span class="contact-link-label">LinkedIn</span>
+        <span class="contact-link-value">linkedin.com/in/yourusername</span>
+      </a>
+      <a class="contact-link" href="mailto:you@email.com">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value">you@email.com</span>
+      </a>
+    </div>
+  </section>
 </div>
 
 <script src="script.js"></script>
