@@ -75,7 +75,52 @@ document.addEventListener('DOMContentLoaded', () => {
 function initFeaturedGrid() {
   const grid = document.getElementById('featured-grid');
   if (!grid) return;
-  renderCards(grid, projects.filter(p => p.featured));
+  renderFeaturedRail(grid, projects.filter(p => p.featured));
+}
+
+function renderFeaturedRail(grid, list) {
+  const statusLabel = { done: 'Complete', wip: 'In Progress', archived: 'Archived' };
+  const statusClass = { done: 'status-done', wip: 'status-wip', archived: 'status-archived' };
+
+  list.forEach((p, i) => {
+    const globalIndex = projects.indexOf(p);
+    const card = document.createElement('article');
+    card.className = 'project-placecard';
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Open project ${p.name}`);
+    card.style.animationDelay = `${i * 0.08}s`;
+
+    card.innerHTML = `
+      <div class="project-placecard-top">
+        <div class="project-card-ref">
+          <span class="project-card-ref-box">J${String(globalIndex + 1).padStart(2, '0')}</span>
+          ${p.type}
+        </div>
+        <span class="project-status ${statusClass[p.status]}">${statusLabel[p.status]}</span>
+      </div>
+      <div class="project-placecard-body">
+        <h3 class="project-card-name">${p.name}</h3>
+        <p class="project-card-desc">${p.short}</p>
+      </div>
+      <div class="project-placecard-bottom">
+        <div class="project-card-tags">
+          ${p.tags.slice(0, 3).map(t => `<span class="project-card-tag">${t}</span>`).join('')}
+        </div>
+        <span class="project-placecard-link">Open case study →</span>
+      </div>
+    `;
+
+    card.addEventListener('click', () => openProject(p.id));
+    card.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openProject(p.id);
+      }
+    });
+
+    grid.appendChild(card);
+  });
 }
 
 
@@ -137,7 +182,7 @@ function initProjectDetail() {
 
   // URL param is the source of truth; localStorage kept as fallback
   const params = new URLSearchParams(window.location.search);
-  const id = params.get('id') || localStorage.getItem('projectId');
+  const id = params.get('id');
   const p = projects.find(x => x.id === id);
 
   if (!p) {
