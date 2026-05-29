@@ -919,3 +919,78 @@ nav {
   .trace-divider { padding: 0 1.2rem; }
   .contact-grid { flex-direction: column; }
 }
+
+/* ── HERO CURRENTLY LINE ──────────────────────────────── */
+.hero-currently {
+  font-size: 0.78rem;
+  color: var(--silk-dim);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.hero-currently-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--trace-dim);
+  margin-bottom: 0.1rem;
+}
+
+/* ── ABOUT WIDE (no card beside it) ──────────────────── */
+.about-body--wide {
+  max-width: 640px;
+}
+
+/* ── CURRENT FOCUS LIST ───────────────────────────────── */
+.focus-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 520px;
+  overflow: hidden;
+}
+
+.focus-item {
+  background: var(--pcb-light);
+  padding: 0.85rem 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  transition: background 0.15s;
+  opacity: 0;
+  animation: traceIn 0.4s var(--ease) forwards;
+}
+
+.focus-item:nth-child(1) { animation-delay: 0.1s; }
+.focus-item:nth-child(2) { animation-delay: 0.18s; }
+.focus-item:nth-child(3) { animation-delay: 0.26s; }
+.focus-item:nth-child(4) { animation-delay: 0.34s; }
+.focus-item:nth-child(5) { animation-delay: 0.42s; }
+
+.focus-item:hover { background: var(--resist); }
+
+.focus-item-marker {
+  color: var(--trace-dim);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+}
+
+.focus-item-text {
+  font-size: 0.78rem;
+  color: var(--silk-dim);
+  letter-spacing: 0.03em;
+}
+
+/* ── WRITING SECTION ──────────────────────────────────── */
+.writing-intro {
+  font-size: 0.8rem;
+  color: var(--silk-dim);
+  line-height: 1.8;
+  max-width: 500px;
+  margin-bottom: 1.5rem;
+}

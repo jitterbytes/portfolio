@@ -8,14 +8,15 @@
 // ────────────────────────────────────────────────────────────
 const projects = [
   {
-    id: "project1 parking",
+    id: "parking",
     name: "Parking Occupancy System",
     short: "Real-time vehicle presence detection using embedded sensing",
     type: "IoT / Embedded",
     platform: "ESP32",
     tags: ["ESP32", "C", "MQTT", "Sensor Fusion"],
-    status: "done",    // done | wip | archived
+    status: "done",
     year: "2024",
+    featured: true,
     problem: "Parking lots have no real-time occupancy data. Drivers waste time circling. Operators are blind. The goal was a low-cost embedded system that detects vehicle presence accurately under real-world conditions — vibration, weather, varying light.",
     approach: "Sensor fusion combining IR and ultrasonic readings, feeding into a debounce + threshold filter to cut false triggers. Data published over MQTT. Firmware in C with a per-slot state machine keeping logic deterministic and debuggable.",
     hardware: ["ESP32", "HC-SR04", "IR Proximity Sensor", "MQTT Broker", "Custom PCB"],
@@ -24,7 +25,7 @@ const projects = [
     github: ""
   },
   {
-    id: "project2 fpga-uart",
+    id: "fpga-uart",
     name: "FPGA UART Core",
     short: "Hardware UART implementation in VHDL",
     type: "FPGA / RTL",
@@ -32,6 +33,7 @@ const projects = [
     tags: ["VHDL", "Xilinx", "Serial"],
     status: "wip",
     year: "2025",
+    featured: true,
     problem: "...",
     approach: "...",
     hardware: ["Artix-7 Dev Board", "JTAG"],
@@ -55,16 +57,26 @@ function navigate(page) {
   setTimeout(() => { window.location.href = page; }, 230);
 }
 
-// Active nav state
 document.addEventListener('DOMContentLoaded', () => {
   const page = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a').forEach(a => {
     if (a.getAttribute('href') === page) a.classList.add('active');
   });
 
+  initFeaturedGrid();
   initProjectsGrid();
   initProjectDetail();
 });
+
+
+// ────────────────────────────────────────────────────────────
+//  FEATURED GRID — index.html
+// ────────────────────────────────────────────────────────────
+function initFeaturedGrid() {
+  const grid = document.getElementById('featured-grid');
+  if (!grid) return;
+  renderCards(grid, projects.filter(p => p.featured));
+}
 
 
 // ────────────────────────────────────────────────────────────
@@ -73,11 +85,19 @@ document.addEventListener('DOMContentLoaded', () => {
 function initProjectsGrid() {
   const grid = document.getElementById('project-grid');
   if (!grid) return;
+  renderCards(grid, projects);
+}
 
+
+// ────────────────────────────────────────────────────────────
+//  SHARED CARD RENDERER
+// ────────────────────────────────────────────────────────────
+function renderCards(grid, list) {
   const statusLabel = { done: 'Complete', wip: 'In Progress', archived: 'Archived' };
   const statusClass = { done: 'status-done', wip: 'status-wip', archived: 'status-archived' };
 
-  projects.forEach((p, i) => {
+  list.forEach((p, i) => {
+    const globalIndex = projects.indexOf(p);
     const card = document.createElement('div');
     card.className = 'project-card';
     card.setAttribute('tabindex', '0');
@@ -87,7 +107,7 @@ function initProjectsGrid() {
 
     card.innerHTML = `
       <div class="project-card-ref">
-        <span class="project-card-ref-box">J${String(i + 1).padStart(2, '0')}</span>
+        <span class="project-card-ref-box">J${String(globalIndex + 1).padStart(2, '0')}</span>
         ${p.type}
       </div>
       <div class="project-card-name">${p.name}</div>
@@ -109,12 +129,15 @@ function initProjectsGrid() {
 
 // ────────────────────────────────────────────────────────────
 //  PROJECT DETAIL — project-template.html
+//  Uses URL param ?id=xxx — browser back button now works
 // ────────────────────────────────────────────────────────────
 function initProjectDetail() {
   const wrap = document.getElementById('project-detail');
   if (!wrap) return;
 
-  const id = localStorage.getItem('projectId');
+  // URL param is the source of truth; localStorage kept as fallback
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id') || localStorage.getItem('projectId');
   const p = projects.find(x => x.id === id);
 
   if (!p) {
@@ -128,7 +151,7 @@ function initProjectDetail() {
   const statusClass = { done: 'status-done', wip: 'status-wip', archived: 'status-archived' };
 
   wrap.innerHTML = `
-    <span class="detail-back" onclick="navigate('projects.html')">← /projects</span>
+    <a class="detail-back" href="projects.html">← /projects</a>
 
     <h1 class="detail-title">${p.name}</h1>
     <p class="detail-desc">${p.short}</p>
@@ -181,9 +204,8 @@ function initProjectDetail() {
 
 
 // ────────────────────────────────────────────────────────────
-//  OPEN PROJECT
+//  OPEN PROJECT — URL param, not localStorage
 // ────────────────────────────────────────────────────────────
 function openProject(id) {
-  localStorage.setItem('projectId', id);
-  navigate('project-template.html');
+  navigate(`project-template.html?id=${id}`);
 }
