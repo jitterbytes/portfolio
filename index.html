@@ -491,6 +491,17 @@ close to the silicon, no shortcuts.`,
       tags: ["WS2812B", "Asthetic"],
       image: "img/luma.png",
       github: "https://github.com/jitterbytes/Project-Luma",
+      demo: "https://www.youtube.com/watch?v=3iAot8fFk2c",
+      doc:"https://www.hackster.io/JitterBytes/luma-an-interactive-ambient-pixel-object-94afe7",
+    },
+    {
+      title: "Project Beta",
+      status: "wip",
+      statusLabel: "In Progress",
+      desc: "A lightweight UART ring-buffer implementation for ATmega328P with interrupt-driven TX/RX.",
+      tags: ["AVR", "UART", "Interrupts"],
+      image: "",
+      github: "",
       demo: "",
     },
     // ── ADD MORE PROJECTS BELOW ──
@@ -613,10 +624,11 @@ document.addEventListener("DOMContentLoaded", () => {
         <h3>${p.title}</h3>
         <p>${p.desc}</p>
         <div class="project-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
-        ${(p.github || p.demo) ? `
+        ${(p.github || p.demo || p.doc) ? `
         <div class="project-links">
           ${p.github ? `<a href="${p.github}" target="_blank">GitHub ↗</a>` : ""}
           ${p.demo   ? `<a href="${p.demo}"   target="_blank">Demo ↗</a>`   : ""}
+          ${p.doc   ? `<a href="${p.doc}"   target="_blank">Docs ↗</a>`   : ""}
         </div>` : ""}
       </div>
     </div>
