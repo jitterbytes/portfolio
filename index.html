@@ -626,9 +626,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="project-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>
         ${(p.github || p.demo || p.doc) ? `
         <div class="project-links">
-          ${p.github ? `<a href="${p.github}" target="_blank">GitHub ↗</a>` : ""}
-          ${p.demo   ? `<a href="${p.demo}"   target="_blank">Demo ↗</a>`   : ""}
-          ${p.doc   ? `<a href="${p.doc}"   target="_blank">Docs ↗</a>`   : ""}
+          ${p.github ? `<a href="${p.github}" target="_blank">GitHub</a>` : ""}
+          ${p.demo   ? `<a href="${p.demo}"   target="_blank">Demo</a>`   : ""}
+          ${p.doc   ? `<a href="${p.doc}"   target="_blank">Docs</a>`   : ""}
         </div>` : ""}
       </div>
     </div>
